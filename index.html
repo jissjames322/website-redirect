@@ -1,12 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Redirecting</title>
-<script>
-window.location.replace("jissportfolio.framer.website/");
-</script>
+<title>Jiss | Portfolio</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:black;
+overflow:hidden;
+font-family:Arial;
+}
+
+button{
+padding:18px 40px;
+font-size:20px;
+border:none;
+border-radius:40px;
+background:#00f7ff;
+color:black;
+cursor:pointer;
+box-shadow:0 0 20px #00f7ff;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 40px #00f7ff;
+}
+
+canvas{
+position:absolute;
+top:0;
+left:0;
+}
+</style>
+
 </head>
+
 <body>
-Redirecting to portfolio...
+
+<canvas id="bg"></canvas>
+
+<button onclick="openPortfolio()">View Portfolio</button>
+
+<script>
+function openPortfolio(){
+window.location.href="https://jissportfolio.framer.website/";
+}
+
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<120;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*3
+});
+}
+
+let mouse={x:0,y:0};
+
+window.addEventListener("mousemove",e=>{
+mouse.x=e.x;
+mouse.y=e.y;
+});
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+
+let dx=mouse.x-p.x;
+let dy=mouse.y-p.y;
+let dist=Math.sqrt(dx*dx+dy*dy);
+
+if(dist<120){
+p.x-=dx*0.02;
+p.y-=dy*0.02;
+}
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fillStyle="#00f7ff";
+ctx.fill();
+
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
 </body>
 </html>
