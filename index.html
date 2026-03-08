@@ -4,43 +4,56 @@
 <title>Jiss | Portfolio</title>
 
 <style>
+
 body{
 margin:0;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:black;
+background:white;
 overflow:hidden;
-font-family:Arial;
-}
-
-button{
-padding:18px 40px;
-font-size:20px;
-border:none;
-border-radius:40px;
-background:#00f7ff;
-color:black;
-cursor:pointer;
-box-shadow:0 0 20px #00f7ff;
-transition:0.3s;
-z-index:10;
-position:relative;
-}
-
-button:hover{
-transform:scale(1.1);
-box-shadow:0 0 40px #00f7ff;
+font-family:Arial, sans-serif;
 }
 
 canvas{
 position:absolute;
 top:0;
 left:0;
+z-index:0;
 }
-</style>
 
+/* Button style */
+
+button{
+padding:18px 40px;
+font-size:20px;
+border:3px solid black;
+border-radius:12px;
+background:white;
+color:black;
+cursor:pointer;
+position:relative;
+z-index:10;
+transition:all 0.15s ease;
+
+/* comic shadow */
+box-shadow:6px 6px 0px black;
+}
+
+/* hover effect */
+
+button:hover{
+transform:translate(-4px,-4px);
+box-shadow:10px 10px 0px black;
+}
+
+button:active{
+transform:translate(2px,2px);
+box-shadow:2px 2px 0px black;
+}
+
+</style>
 </head>
 
 <body>
@@ -50,8 +63,9 @@ left:0;
 <button onclick="openPortfolio()">View Portfolio</button>
 
 <script>
+
 function openPortfolio(){
-window.location.href="https://jissportfolio.framer.website/";
+window.open("https://jissportfolio.framer.website/","_blank");
 }
 
 const canvas=document.getElementById("bg");
@@ -66,7 +80,7 @@ for(let i=0;i<120;i++){
 particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-size:Math.random()*3
+size:Math.random()*2
 });
 }
 
@@ -94,7 +108,7 @@ p.y-=dy*0.02;
 
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-ctx.fillStyle="#00f7ff";
+ctx.fillStyle="black";
 ctx.fill();
 
 });
@@ -103,6 +117,7 @@ requestAnimationFrame(animate);
 }
 
 animate();
+
 </script>
 
 </body>
